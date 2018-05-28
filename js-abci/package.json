@@ -1,0 +1,29 @@
+{
+  "name": "abci",
+  "version": "2.1.0",
+  "description": "Tendermint ABCI server",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard src/*.js test/*.js && nyc ava test/connection.js test/server.js"
+  },
+  "keywords": [
+    "abci",
+    "tendermint",
+    "cosmos",
+    "blockchain"
+  ],
+  "author": "Matt Bell <mappum@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bl": "^1.2.2",
+    "debug": "^3.1.0",
+    "protobufjs": "^6.8.6",
+    "protocol-buffers-encodings": "^1.1.0",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "nyc": "^11.7.1",
+    "standard": "^11.0.1"
+  }
+}
