@@ -34,7 +34,9 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
 	console.log("Message Received From Topic " + topic)
 	console.log(message.toString())
-	hex_buffer=convert_to_buffer(message.toString())
+	json_data=JSON.parse(message)
+	json_data["topic"]=topic //appending topic to the payload for consensus message
+	hex_buffer=convert_to_buffer(JSON.stringify(json_data))
 	console.log(hex_buffer);
 	push_transaction_to_the_network(uri+hex_buffer);
 })
@@ -65,13 +67,20 @@ function get_block_and_data(block_height){
 block_uri = "http://192.168.1.148:46657/block?height="+block_height
 request(block_uri, { json: true }, (err, res, body) => {
   	if (err) { return console.log(err); }
-	//console.log(body);
+	console.log("Fetching Block Information");
+	console.log(body);
 	console.log(body.result.block.data.txs[0]);
 
   	if ("txs" in body.result.block.data){
 		console.log("Transaction found in the block")
 		data_base64=body.result.block.data.txs[0];
-  		console.log(convert_base64_to_ascii(data_base64));
+  		payload_string=convert_base64_to_ascii(data_base64);
+		console.log(JSON.stringify(payload_string))
+		json_data=JSON.parse(JSON.parse(payload_string))
+		console.log(json_data.topic);
+		verified_topic=json_data.topic+"_verified"
+		console.log(verified_topic);	
+		client.publish(verified_topic,JSON.stringify(json_data))	
 		return	
   	}
 
@@ -106,7 +115,7 @@ request(block_uri, { json: true }, (err, res, body) => {
 ********************************************************/
 function validate_transaction(response){
 	console.log(response)
-	if(response.check_tx.log == "Good" && response.deliver_tx.log ==  "tx succeeded"){
+	if(response.deliver_tx.log ==  "tx succeeded"){
 		console.log("Contract intact -> State Replicated")
 		return response.height	
 	}
