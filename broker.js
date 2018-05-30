@@ -1,6 +1,5 @@
 let createABCIServer = require('abci')
 var mqtt = require('mqtt');
-const readJsonSync = require('read-json-sync');
 
 /***********************************************************************/
 /*var client = mqtt.connect('mqtt://localhost:1883')
