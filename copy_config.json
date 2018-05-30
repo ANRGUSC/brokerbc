@@ -1,0 +1,2 @@
+#/bin/sh
+cp config.toml ~/.tendermint/config/
