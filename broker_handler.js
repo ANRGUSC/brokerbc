@@ -2,7 +2,7 @@ const request = require('request');
 var mqtt = require('mqtt');
 
 /***********************************************************************/
-var client = mqtt.connect('mqtt://eclipse.usc.edu')
+var client = mqtt.connect('mqtt://localhost')
 
 
 /**********************************************************************/
@@ -10,7 +10,6 @@ Registered_Topics=["PackageABC","PackageDEF","PackageGHI"]
 
 /**********************************************************************/
 uri = "http://192.168.1.148:46657/broadcast_tx_commit?tx=0x"
-
 
 
 /*********************************************************************/
@@ -40,9 +39,6 @@ client.on('message', function (topic, message) {
 	console.log(hex_buffer);
 	push_transaction_to_the_network(uri+hex_buffer);
 })
-
-
-
 
 
 /**************************************************/
@@ -86,9 +82,6 @@ request(block_uri, { json: true }, (err, res, body) => {
 
 	});
 }
-
-
-
 
 /********************************************************/
 /*this function validates the response of the transaction***

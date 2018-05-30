@@ -1,9 +1,7 @@
 var mqtt = require('mqtt')
 
-
-
 /***********************************************************************/
-var client = mqtt.connect('mqtt://eclipse.usc.edu')
+var client = mqtt.connect('mqtt://localhost')
 
 /**********************************************************************/
 Registered_Topics=["PackageABC","PackageDEF","PackageGHI"]
