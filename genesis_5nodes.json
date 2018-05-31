@@ -1,0 +1,47 @@
+{
+  "genesis_time": "2018-05-22T21:21:00.46011343Z",
+  "chain_id": "test-chain-GwUwsc",
+  "validators": [
+    {
+      "pub_key": {
+        "type": "AC26791624DE60",
+        "value": "n4+DrAi4H4LbaNucqA+xKmgJbTCBEVbV3dJVtGhzWoI="
+      },
+      "power":10,
+      "name":""
+    },
+    {
+      "pub_key": {
+      "type": "AC26791624DE60",
+      "value": "dDroTTtURDPJ0OaK9MIAWglOtL+nxdWCihXwPJlXwiU="
+      },
+      "power":10,
+      "name":""
+    },
+    {
+      "pub_key": {
+        "type": "AC26791624DE60",
+        "value": "WIXCcibBRi/uqV7ue3DHZJP4peeGQmKU+GTt83eEdIY="
+      },
+      "power":10,
+      "name":""
+    },
+    {
+      "pub_key": {
+        "type": "AC26791624DE60",
+        "value": "1C+vv1H72plf7dgfqCchFi59M+BdfvGmFvrjzhwHjVs="
+      },
+      "power":10,
+      "name":""
+    },
+    {
+      "pub_key": {
+        "type": "AC26791624DE60",
+        "value": "alIRunGDqOidKNl2+elSB4z7YA5DAxjw3AxBP93oB+8="
+      },
+      "power":10,
+      "name":""
+    }  
+  ],
+  "app_hash": ""
+}
