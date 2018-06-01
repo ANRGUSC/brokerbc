@@ -32,8 +32,6 @@ files = [join(args.folder, f) for f in listdir(args.folder)
          if isfile(join(args.folder, f)) and f.endswith('.log') and
          len(f.split('-')) >= 4]
 
-msg_queue = Queue.Queue()
-
 # broker -> tps -> [(# nodes, e2e_delay)]
 data = {
     's': defaultdict(list),
@@ -45,6 +43,8 @@ max_nodes = 0
 
 # Parse log files
 for filename in files:
+    msg_queue = Queue.Queue()
+
     e2e_duration = 0
     e2e_count = 0
 
