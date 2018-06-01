@@ -157,7 +157,9 @@ let handlers = {
 
   deliverTx (request) {
     //let tx = padTx(request.tx)
-    console.log("Request at deliverTx is:"+request.tx);	  
+    console.log("////////////////////////////////////");
+    console.log("Request at deliverTx is:"+request.tx);	
+    console.log("////////////////////////////////////");	  
     //let number = tx.readUInt32BE(0)
     //console.log("Request in number is: "+number)	  
     /*if (number !== state.count) {
