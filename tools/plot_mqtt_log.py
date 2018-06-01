@@ -38,15 +38,24 @@ data = {
     'd': defaultdict(list)
 }
 
+data_local = {
+    's': defaultdict(list),
+    'd': defaultdict(list)
+}
+
 min_nodes = 100
 max_nodes = 0
 
 # Parse log files
 for filename in files:
-    msg_queue = Queue.Queue()
+    e2e_queue = Queue.Queue()
+    local_queue = Queue.Queue()
 
     e2e_duration = 0
     e2e_count = 0
+
+    local_duration = 0
+    local_count = 0
 
     parameters = filename.split('-')
 
@@ -71,15 +80,28 @@ for filename in files:
             topic = tokens[1]
 
             if (topic.endswith('_verified')):
-                e2e_duration += timestamp - msg_queue.get()
+                # Verified message
+                e2e_duration += timestamp - e2e_queue.get()
                 e2e_count += 1
+
+            elif (topic.endswith('_sent')):
+                # Published message
+                e2e_queue.put(timestamp)
+                local_queue.put(timestamp)
+
             else:
-                msg_queue.put(timestamp)
+                # Subscribed message
+                local_duration += timestamp - local_queue.get()
+                local_count += 1
+
 
     e2e_delay = e2e_duration/e2e_count/1000
-    print filename, e2e_delay, e2e_count
+    local_delay = local_duration/local_count/1000
+
+    print filename, e2e_delay, e2e_count, local_delay, local_count
 
     data[broker][tps].append((num_nodes, e2e_delay))
+    data_local[broker][tps].append((num_nodes, local_delay))
 
 # Generate plots
 def plot_lines(tag, title):
@@ -88,12 +110,18 @@ def plot_lines(tag, title):
 
     for l in lines:
         d = sorted(data[tag][l])
+        d_local = sorted(data_local[tag][l])
 
         x, y = zip(*d)
         x = list(x)
         y = list(y)
 
-        plt.plot(x, y, '.-', label=str(l) + ' TX/s')
+        x_local, y_local = zip(*d_local)
+        x_local = list(x_local)
+        y_local = list(y_local)
+
+        plt.plot(x, y, '.-', label=str(l) + ' TX/s (committed)')
+        plt.plot(x_local, y_local, '.-', label=str(l) + ' TX/s (loopback)')
 
     plt.xlim(min_nodes, max_nodes)
     plt.legend()
