@@ -27,11 +27,7 @@ const Rate = parseFloat(args.r) || 1/60
 const Num = parseInt(args.n) || 10
 const Wait = parseFloat(args.w) || 5
 
-const data = JSON.stringify({
-  Warehouse: 'Warehouse123,456 Street,Country 00001',
-  Temperature: 15,
-  Timestamp: Date.now() //ms
-})
+
 
 //console.log(To, From, Topic, Rate, Num)
 
@@ -74,18 +70,23 @@ sendClient.on('error', error => {
 let iterations = 0
 
 function publish(client) {
-  client.publish(Topic, data)
+	const data = JSON.stringify({
+  		Warehouse: 'Warehouse123,456 Street,Country 00001',
+  		Temperature: 15,
+  		Timestamp: Date.now() //ms
+	})
+  	client.publish(Topic, data)
 
-  ++iterations
+  	++iterations
 
-  if (iterations === Num) {
-    // Wait a minute before exiting
-    setTimeout(shutdown, 1000 * Wait)
-  }
-  else {
-    // More messages!
-    setTimeout(publish, 1000 / Rate, client)
-  }
+  	if (iterations === Num) {
+    		// Wait a minute before exiting
+    		setTimeout(shutdown, 1000 * Wait)
+  	}
+  	else {
+    	// More messages!
+    	setTimeout(publish, 1000 * Rate, client)
+  	}
 }
 
 function sendMessages(client) {
