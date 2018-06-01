@@ -97,7 +97,7 @@ def plot_lines(tag, title):
         x = list(x)
         y = list(y)
 
-        plt.plot(x, y, '.-', label=str(l) + ' tps')
+        plt.plot(x, y, '.-', label=str(l) + ' TX/s')
 
     plt.xlim(min_nodes, max_nodes)
     plt.legend()
@@ -108,7 +108,7 @@ def plot_lines(tag, title):
 
 if args.p:
     plt.figure(0)
-    plot_lines('s', 'Network Activity (Same Broker)')
+    plot_lines('s', 'Network Activity')
 
     plt.figure(1)
     plot_lines('d', 'Network Activity (Different Brokers)')

@@ -93,7 +93,7 @@ def plot_lines(tag, title):
         x = list(x)
         y = list(y)
 
-        plt.plot(x, y, '.-', label=str(l) + ' tps')
+        plt.plot(x, y, '.-', label=str(l) + ' TX/s')
 
     plt.xlim(min_nodes, max_nodes)
     plt.legend()
