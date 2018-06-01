@@ -92,7 +92,6 @@ seeds = """fd208d4af60c673d5a6eb5491952de11f6eee66b@192.168.1.133:46656, \
 
 # Comma separated list of nodes to keep persistent connections to
 # Do not add private peers to this list if you don't want them advertised
-# persistent_peers for 20 nodes (33-52)
 persistent_peers = """fd208d4af60c673d5a6eb5491952de11f6eee66b@192.168.1.133:46656, \
                     ff5e56c60cfdfd91114c34917ea55c7687589011@192.168.1.134:46656, \
                     1a9b562afdc45dc8795a5f7edc9d4bd496c5f8f6@192.168.1.135:46656, \
