@@ -75,18 +75,19 @@ function publish(client) {
   		Temperature: 15,
   		Timestamp: Date.now() //ms
 	})
-  	client.publish(Topic, data)
+  console.log(`${Date.now()} ${Topic}_sent ${data}`)
+  client.publish(Topic, data)
 
-  	++iterations
+  ++iterations
 
-  	if (iterations === Num) {
-    		// Wait a minute before exiting
-    		setTimeout(shutdown, 1000 * Wait)
-  	}
-  	else {
-    	// More messages!
-    	setTimeout(publish, 1000 * Rate, client)
-  	}
+  if (iterations === Num) {
+    // Wait a minute before exiting
+    setTimeout(shutdown, 1000 * Wait)
+  }
+  else {
+    // More messages!
+    setTimeout(publish, 1000 * Rate, client)
+  }
 }
 
 function sendMessages(client) {
