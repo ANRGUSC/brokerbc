@@ -135,10 +135,11 @@ let handlers = {
 	console.log("Current state is " + currentstate);  
 	console.log("Current temp is " + currentstate[2]);
 	json_data=JSON.parse(currentstate)  
-	console.log("Current temp is " + json_data.Temperature);  
+	console.log("Current temp is " + json_data.Temperature);
+	return { code: 0, log: 'Good' }  
 	//validate_contract(json_data);  
 
-	if(json_data.topic != "contract"){  
+	/*if(json_data.topic != "contract"){  
 
 	//checking the state against the contract
 	//Adding transactions to the block irrespective of the outcome,
@@ -151,7 +152,7 @@ let handlers = {
         return { code: 0, log: 'Good' }
 	}else{
         return { code: 0, log: 'Contract' }
-	}
+	}*/
 
   },
 

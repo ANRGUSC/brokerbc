@@ -4,24 +4,24 @@
   "validators": [
     {
       "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "AZOlVkhTAd78qcvyejWv7tbT2V5PtDymC2QQ39I5sp0="
-      },
-      "power": 10,
-      "name": ""
+            "type": "AC26791624DE60",
+            "value": "j2L5Hqel1VbzAhw2gZzq3FKTXHhPKzHCgpza4Q2l51I="
+                 },
+     "power":10,
+     "name":""
     },
     {
       "pub_key": {
-	    "type": "AC26791624DE60",
-	    "value": "NHCLU0X8s0D6UanN45OpVmagE4rdGimQiES5n9nGFpQ="
+            "type": "AC26791624DE60",
+            "value": "NHCLU0X8s0D6UanN45OpVmagE4rdGimQiES5n9nGFpQ="
      },
      "power":10,
      "name":""
     },
     {
       "pub_key": {
-    	"type": "AC26791624DE60",
-    	"value": "jtfEB/bSSu51NAlEwjyftLgtM9DynrOXdiJL5jwpL1M="
+        "type": "AC26791624DE60",
+        "value": "jtfEB/bSSu51NAlEwjyftLgtM9DynrOXdiJL5jwpL1M="
       },
       "power":10,
       "name":""
@@ -36,132 +36,12 @@
     },
     {
       "pub_key": {
-    	"type": "AC26791624DE60",
-    	"value": "vFUVbzAycqT3MAHnNF05nIAJFr+zBm2TmJULD8Fr+po="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
         "type": "AC26791624DE60",
-        "value": "n4+DrAi4H4LbaNucqA+xKmgJbTCBEVbV3dJVtGhzWoI="
+        "value": "vFUVbzAycqT3MAHnNF05nIAJFr+zBm2TmJULD8Fr+po="
       },
       "power":10,
       "name":""
-    },
-    {
-      "pub_key": {
-      "type": "AC26791624DE60",
-      "value": "dDroTTtURDPJ0OaK9MIAWglOtL+nxdWCihXwPJlXwiU="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "WIXCcibBRi/uqV7ue3DHZJP4peeGQmKU+GTt83eEdIY="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "1C+vv1H72plf7dgfqCchFi59M+BdfvGmFvrjzhwHjVs="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "alIRunGDqOidKNl2+elSB4z7YA5DAxjw3AxBP93oB+8="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "j2L5Hqel1VbzAhw2gZzq3FKTXHhPKzHCgpza4Q2l51I="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "+4F7Nkdk2JJy/jE5hDVj2ewnwLkCdHT81joKg8E6y6E="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "Su23pUQANRlPzlvqijICcrOXC1Q9vECu/e/UobK1vw0="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "CbSHa4zACeAwu6K4utA9kgpbUki+XSKhuLyhgIqOW5w="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "rzv14tI2YcWjZlcJg2LGM8Aq7PoYlX4jr+xvl/yB3PA="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "MFKfFDisCpu3uWViTWGV7/PB2jioXZjQTw6SYnhE42s="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "GTg8ZBuEksodyyyusF/fgKCL6Qj2FZX0lYioa6QOqAY="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "OQBrUlivPkiKKfrUz7cWs5w3mB8kqUp/l0eNLAy/gg4="
-      },
-      "power":10,
-      "name":""
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "hhIQvoajS+NBswV9gRoBRf6tzdiCZR7KM1Ogd8mI/vQ="
-    },
-    "power":10,
-    "name":""	  
-    },
-    {
-      "pub_key": {
-        "type": "AC26791624DE60",
-        "value": "uHss+vjdIA+if8Vj+gRJts7tqYV9jHKfkVmKKaM7RdQ="
-      },
-      "power":10,
-      "name":""
-    }  
-  ],
+    }
+	 ],
   "app_hash": ""
 }
