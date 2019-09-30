@@ -38,7 +38,8 @@ client.on('connect', function () {
 })
 
 client.on('message', function (topic, message) {
-	console.log("Message Received From Topic " + topic)
+	var millisec = (new Date).getTime();
+	console.log("Message Received From Topic " + topic + " at: "+millisec)
 	console.log(message.toString())
 	json_data=JSON.parse(message)
 	json_data["topic"]=topic //appending topic to the payload for consensus message
