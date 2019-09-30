@@ -28,9 +28,11 @@ function convert_to_buffer(message){
 
 client.on('connect', function () {
 	console.log("Connected to the Broker -> Waiting for Message");
+	var Unverified_topics = []
 	for(i=0;i<Registered_Topics.length;i++) {
-		console.log(Registered_Topics[i])
-		client.subscribe(Registered_Topics[i])
+		Unverified_topics.push(Registered_Topics[i]+"_unverified")
+		console.log(Unverified_topics[i])
+		client.subscribe(Unverified_topics[i])
 	}
 
 })
