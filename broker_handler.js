@@ -88,7 +88,7 @@ request(block_uri, { json: true }, (err, res, body) => {
 		console.log(JSON.stringify(payload_string))
 		json_data=JSON.parse(JSON.parse(payload_string))
 		console.log(json_data.topic);
-		verified_topic=json_data.topic+"_verified"
+		verified_topic=json_data.topic.replace("_unverified", "_verified")
 		console.log(verified_topic);	
 		client.publish(verified_topic,JSON.stringify(json_data))
 		return	
