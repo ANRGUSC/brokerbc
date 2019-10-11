@@ -6,16 +6,17 @@ var util = require('util');
 var client = mqtt.connect('mqtt://localhost')
 
 /*******************************************************/
-var last_block=-1
+/*var last_block=-1
 var tracker=0
-
-
+*/
 /**********************************************************************/
 Registered_Topics=["PackageABC","PackageDEF","PackageGHI","ripa"]
 
+Read_block = {}
+var last_block_height_read = 0
+
 /**********************************************************************/
 uri = "http://192.168.1.135:46657/broadcast_tx_commit?tx=0x"
-
 
 /*********************************************************************/
 /************this function converts json to suitable hex buffer******/
@@ -28,11 +29,9 @@ function convert_to_buffer(message){
 
 client.on('connect', function () {
 	console.log("Connected to the Broker -> Waiting for Message");
-	var Unverified_topics = []
 	for(i=0;i<Registered_Topics.length;i++) {
-		Unverified_topics.push(Registered_Topics[i]+"_unverified")
-		console.log(Unverified_topics[i])
-		client.subscribe(Unverified_topics[i])
+		console.log(Registered_Topics[i])
+		client.subscribe(Registered_Topics[i])
 	}
 
 })
@@ -74,23 +73,26 @@ request(block_uri, { json: true }, (err, res, body) => {
 	console.log("Fetching Block Information");
 	console.log("Printing Body");
 	console.log(body);
-	console.log(body.result.block.data.txs[0]);
 
   	if ("txs" in body.result.block.data){
-		console.log("Transaction found in the block")
+		console.log("Transactions found in the block")
 		numtx=body.result.block_meta.header.num_txs
-		if(last_block!=block_height){
-			last_block=block_height;
-			tracker=0;
+		console.log("No of txns: "+numtx)
+
+		var tracker = 0
+
+		while (tracker < numtx) {
+			data_base64=body.result.block.data.txs[tracker++];
+			payload_string=convert_base64_to_ascii(data_base64);
+			console.log(JSON.stringify(payload_string))
+			json_data=JSON.parse(JSON.parse(payload_string))
+			console.log(json_data.topic);
+			json_data.topic=json_data.topic+"_verified"
+			verified_topic=json_data.topic
+			console.log(verified_topic);
+			client.publish(verified_topic,JSON.stringify(json_data))
 		}
-		data_base64=body.result.block.data.txs[tracker++];
-  		payload_string=convert_base64_to_ascii(data_base64);
-		console.log(JSON.stringify(payload_string))
-		json_data=JSON.parse(JSON.parse(payload_string))
-		console.log(json_data.topic);
-		verified_topic=json_data.topic.replace("_unverified", "_verified")
-		console.log(verified_topic);	
-		client.publish(verified_topic,JSON.stringify(json_data))
+
 		return	
   	}
 
@@ -136,8 +138,21 @@ request(uri, { json: true }, (err, res, body) => {
   if ("result" in body){
   	console.log(body.result);
   	height = validate_transaction(body.result)
-	console.log("Height is ",height);	
-	get_block_and_data(height);
+	console.log("Height is ",height)
+
+	if (last_block_height_read != 0 && (last_block_height_read+1) < height) {
+		Read_block[last_block_height_read+1] = 1
+		get_block_and_data(last_block_height_read+1)
+	}
+
+	Read_block[height] = 1
+	get_block_and_data(height)
+	last_block_height_read = height
+
+	if (height > 2 && !((height-1) in Read_block)) {
+		Read_block[height-1] = 1
+		get_block_and_data(height-1)
+	}
 	return	
   }
   if ("error" in body){
@@ -146,5 +161,3 @@ request(uri, { json: true }, (err, res, body) => {
   }
 });
 }
-
-
