@@ -45,7 +45,7 @@ String.prototype.hashCode = function() {
 //console.log(Topic, Rate, Num)
 
 // MQTT connections
-const recvClient = mqtt.connect(`mqtt://${From}`)
+const recvClient = mqtt.connect(`mqtt:${From}`)
 
 // Connection setup
 recvClient.on('connect', () => {
@@ -55,14 +55,21 @@ recvClient.on('connect', () => {
 recvClient.on('message', function (topic, message) {
   var millisec = Date.now()
   var msg_modified = JSON.parse(message)
-  var Msg_hash = (JSON.stringify(msg_modified)).hashCode()
+  //msg_modified["broker_id"] = " "
+  delete msg_modified["broker_id"]
+  var msg_mod_str = JSON.stringify(msg_modified)
+  var Msg_hash = (msg_mod_str).hashCode()
   Msg_hash = Msg_hash.toString()
 
   if (!(Msg_hash in dict)) {
     dict[Msg_hash] = 1
-    console.log(`${millisec} ${topic} '${message.toString()}'`)
   } else {
     dict[Msg_hash] += 1
+  }
+
+  if (dict[Msg_hash] >= Math.ceil(2*clients_count/3)) {
+    console.log(`${millisec} ${topic} '${msg_mod_str}'`)
+    //console.log(`${millisec} ${topic} '${message.toString()}'`)
   }
 })
 
@@ -73,29 +80,34 @@ recvClient.on('error', error => {
 
 let iterations = 0
 
-setInterval(function () {
+var timr = setInterval(function () {
   var millisec = Date.now()
-  const data = JSON.stringify({
+  var dat = {
 	  "Warehouse": "Warehouse123,456 Street,Country 00001",
 	  "Temperature": 15,
 	  "Timestamp": millisec //ms
-  })
-  console.log(`${millisec} ${Topic}_sent ${data}`)
+  }
+  var data = JSON.stringify(dat)
+  console.log(`${millisec} ${Topic}_sent '${data}'`)
 
   for (var i=0;i<clients_count;i++) {
     var client = mqtt.connect(clients.client[i])
-    client.publish(Topic, data)				
+    dat["broker_id"] = "client" + i
+    client.publish(Topic, JSON.stringify(dat))
   }
 
   ++iterations
+  //console.log("Iterations"+iterations)
 
-  if (iterations === Num) {
+  if (iterations == Num) {
     // Wait a minute before exiting
-    setTimeout(shutdown, 1000 * Wait)
+    // setTimeout(shutdown, 1000 * Wait)
+    shutdown()
   }
 
 },1000*Rate);
 
 function shutdown() {
-  recvClient.end()
+  clearInterval(timr)
+  //recvClient.end()
 }
